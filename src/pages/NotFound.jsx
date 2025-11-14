@@ -1,22 +1,25 @@
-import { Link, useLocation } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 export default function NotFound() {
-  const location = useLocation();
 
-  const isActive = (path) => location.pathname === path;
+const [isLoading, setIsLoading] = useState(true);
 
+useEffect(() => {
+  setTimeout(() => setIsLoading(false), 1000);
+}, []);
   return (
     <>
       {/* Preloader */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
         <div className="relative">
           <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-indigo-600"></div>
           <img src="/images/loader.svg" alt="Aeravionix" className="absolute inset-0 m-auto h-8 w-8" />
         </div>
-      </div>
+      </div>)}
 
       {/* Header with Active Nav */}
-      <header className="sticky top-0 z-40 bg-white shadow-md">
+      {/* <header className="sticky top-0 z-40 bg-white shadow-md">
         <nav className="container mx-auto flex flex-wrap items-center justify-between px-4 py-4">
           <Link to="/" className="flex items-center">
             <img src="/images/logo.svg" alt="Aeravionix Logo" className="h-10" />
@@ -64,7 +67,7 @@ export default function NotFound() {
             Get Started
           </Link>
         </nav>
-      </header>
+      </header> */}
 
       {/* Page Header */}
       <section className="page-header bg-gradient-to-br from-indigo-50 to-purple-100 py-20">
@@ -103,48 +106,7 @@ export default function NotFound() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="main-footer bg-gray-900 py-16 text-white">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div>
-              <h2 className="mb-4 text-3xl font-bold">
-                Let's start work <span className="text-indigo-400">together!</span>
-              </h2>
-              <p className="mb-6">Partner with us to create intelligent, impactful, and future-ready AI solutions together.</p>
-            </div>
-            <div className="flex items-center justify-center md:justify-start">
-              <Link to="/contact" className="rounded bg-indigo-600 px-6 py-3 font-semibold transition hover:bg-indigo-700">
-                Let's Work Together
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div>
-              <img src="/images/footer-logo.svg" alt="Aeravionix" className="mb-4 h-12" />
-            </div>
-            <div>
-              <h3 className="mb-2 text-lg font-semibold">Get In Touch</h3>
-              <p className="mb-1"><a href="tel:+00152885253" className="hover:text-indigo-400">+(00) - 152 885 253</a></p>
-              <p><a href="mailto:info@aeravionix.com" className="hover:text-indigo-400">info@aeravionix.com</a></p>
-              <h3 className="mt-6 mb-2 text-lg font-semibold">Our Location</h3>
-              <p>123 Lorem Street Suite 5B, Ips Park London, UK SW1A 1AA</p>
-            </div>
-            <div>
-              <h3 className="mb-2 text-lg font-semibold">Subscribe Newsletter</h3>
-              <form className="flex">
-                <input type="email" placeholder="Enter your email" className="w-full rounded-l border border-gray-700 bg-gray-800 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600" />
-                <button className="rounded-r bg-indigo-600 px-4 py-2 transition hover:bg-indigo-700">Subscribe</button>
-              </form>
-            </div>
-          </div>
-
-          <div className="mt-12 border-t border-gray-700 pt-6 text-center text-sm">
-            <p>Copyright © 2025 Aeravionix. All Rights Reserved.</p>
-          </div>
-        </div>
-      </footer>
+    
     </>
   );
 }

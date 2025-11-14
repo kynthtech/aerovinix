@@ -1,15 +1,13 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState , useEffect } from 'react';
+import { Link, } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 export default function Services() {
-  const location = useLocation();
   const [openFaq, setOpenFaq] = useState(2); // Open FAQ #2 by default
 
-  const isActive = (path) => location.pathname === path;
 
   const services = [
     'AI Strategy & Consulting',
@@ -40,65 +38,23 @@ export default function Services() {
     { q: 'Is my data secure with you?', a: 'Project timelines vary depending on complexity but typically range from 4 to 12 weeks. We provide a clear roadmap during the discovery phase.' },
     { q: 'Can you integrate AI into our existing systems?', a: 'Project timelines vary depending on complexity but typically range from 4 to 12 weeks. We provide a clear roadmap during the discovery phase.' },
   ];
+const [isLoading, setIsLoading] = useState(true);
 
+useEffect(() => {
+  setTimeout(() => setIsLoading(false), 1000);
+}, []);
   return (
     <>
       {/* Preloader */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-        <div className="relative">
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+          <div className="relative">
           <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-indigo-600"></div>
           <img src="/images/loader.svg" alt="Aeravionix" className="absolute inset-0 m-auto h-8 w-8" />
         </div>
-      </div>
+      </div>)}
 
-      {/* Header with Active Nav */}
-      <header className="sticky top-0 z-40 bg-white shadow-md">
-        <nav className="container mx-auto flex flex-wrap items-center justify-between px-4 py-4">
-          <Link to="/" className="flex items-center">
-            <img src="/images/logo.svg" alt="Aeravionix Logo" className="h-10" />
-          </Link>
-
-          <div className="hidden space-x-8 lg:flex">
-            <div className="group relative">
-              <button className={`font-medium transition ${isActive('/') || isActive('/home-image') || isActive('/home-video') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600'}`}>
-                Home
-              </button>
-              <div className="absolute left-0 mt-2 hidden w-48 rounded bg-white shadow-lg group-hover:block">
-                <Link to="/" className="block px-4 py-2 hover:bg-indigo-50">Home - Main</Link>
-                <Link to="/home-image" className="block px-4 py-2 hover:bg-indigo-50">Home - Image</Link>
-                <Link to="/home-video" className="block px-4 py-2 hover:bg-indigo-50">Home - Video</Link>
-              </div>
-            </div>
-
-            <Link to="/about" className={`font-medium transition ${isActive('/about') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600'}`}>About Us</Link>
-            <Link to="/services" className={`font-medium transition ${isActive('/services') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600'}`}>Services</Link>
-            <Link to="/blog" className={`font-medium transition ${isActive('/blog') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600'}`}>Blog</Link>
-
-            <div className="group relative">
-              <button className="text-gray-700 hover:text-indigo-600 font-medium transition">Pages</button>
-              <div className="absolute left-0 mt-2 hidden w-56 rounded bg-white shadow-lg group-hover:block">
-                <Link to="/service-single" className="block px-4 py-2 hover:bg-indigo-50">Service Details</Link>
-                <Link to="/blog-single" className="block px-4 py-2 hover:bg-indigo-50">Blog Details</Link>
-                <Link to="/projects" className="block px-4 py-2 hover:bg-indigo-50">Projects</Link>
-                <Link to="/project-single" className="block px-4 py-2 hover:bg-indigo-50">Project Details</Link>
-                <Link to="/team" className="block px-4 py-2 hover:bg-indigo-50">Our Team</Link>
-                <Link to="/team-single" className="block px-4 py-2 hover:bg-indigo-50">Team Details</Link>
-                <Link to="/testimonials" className="block px-4 py-2 hover:bg-indigo-50">Testimonials</Link>
-                <Link to="/image-gallery" className="block px-4 py-2 hover:bg-indigo-50">Image Gallery</Link>
-                <Link to="/video-gallery" className="block px-4 py-2 hover:bg-indigo-50">Video Gallery</Link>
-                <Link to="/faqs" className="block px-4 py-2 hover:bg-indigo-50">FAQs</Link>
-                <Link to="/404" className="block px-4 py-2 hover:bg-indigo-50">404</Link>
-              </div>
-            </div>
-
-            <Link to="/contact" className={`font-medium transition ${isActive('/contact') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600'}`}>Contact Us</Link>
-          </div>
-
-          <Link to="/contact" className="rounded bg-indigo-600 px-5 py-2 text-white transition hover:bg-indigo-700">
-            Get Started
-          </Link>
-        </nav>
-      </header>
+    
 
       {/* Page Header */}
       <section className="page-header bg-gradient-to-br from-indigo-50 to-purple-100 py-20">
@@ -119,7 +75,7 @@ export default function Services() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {services.map((title, i) => (
-              <div key={i} className="group rounded-xl bg-gray-50 p-6 shadow-md transition hover:shadow-xl">
+              <div key={`service-${title}`} className="group rounded-xl bg-gray-50 p-6 shadow-md transition hover:shadow-xl">
                 <div className="mb-4">
                   <h3 className="mb-2 text-xl font-semibold text-gray-800">
                     <Link to="/service-single" className="hover:text-indigo-600">{title}</Link>
@@ -144,8 +100,8 @@ export default function Services() {
               <h2 className="mb-8 text-4xl font-bold text-gray-900">
                 Our process for smarter <span className="text-indigo-600">AI solutions</span>
               </h2>
-              {steps.map((step, i) => (
-                <div key={i} className="mb-8 flex gap-4">
+              {steps.map((step,) => (
+                <div key={`step-${step.step}`} className="mb-8 flex gap-4">
                   <div className="flex-shrink-0">
                     <img src={`/images/${step.icon}`} alt="" className="h-12 w-12" />
                     <p className="mt-1 text-sm font-bold text-indigo-600">step {step.step}</p>
@@ -180,8 +136,8 @@ export default function Services() {
               </h3>
               <img src="/images/what-we-do-img.png" alt="" className="mb-6 w-full rounded-xl shadow-lg" />
               <ul className="flex flex-wrap gap-3">
-                {['UI/UX Design', 'Chatbot Design', 'Predictive', 'Design Automation', 'Generative Branding'].map((item) => (
-                  <li key={item} className="rounded-full bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700">{item}</li>
+                {['UI/UX Design', 'Chatbot Design', 'Predictive', 'Design Automation', 'Generative Branding'].map((item, index) => (
+                  <li key={`features-${index}-${item}`} className="rounded-full bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700">{item}</li>
                 ))}
               </ul>
             </div>
@@ -194,8 +150,8 @@ export default function Services() {
                 We craft cutting-edge AI solutions tailored to your business needs—driving smarter decisions, streamlined operations.
               </p>
               <ul className="mb-8 space-y-2 text-gray-700">
-                {['Computer Vision', 'AI Integration', 'Ongoing Support', 'AI Strategy', 'Custom AI Development'].map((item) => (
-                  <li key={item} className="flex items-center gap-2">
+                {['Computer Vision', 'AI Integration', 'Ongoing Support', 'AI Strategy', 'Custom AI Development'].map((item, index) => (
+                  <li key={`service-feature-${index}-${item}`} className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-indigo-600"></span> {item}
                   </li>
                 ))}
@@ -240,7 +196,7 @@ export default function Services() {
                 className="pb-12"
               >
                 {testimonials.map((t, i) => (
-                  <SwiperSlide key={i}>
+                  <SwiperSlide key={`testimonial-${i}-${t.name}`}>
                     <div className="rounded-xl bg-white p-6 shadow-lg">
                       <div className="mb-4 flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -277,7 +233,7 @@ export default function Services() {
             </div>
             <div className="space-y-4">
               {faqs.map((faq, i) => (
-                <div key={i} className="rounded-xl border border-gray-200 bg-white">
+                <div key={`faq-${i}-${faq.q}`} className="rounded-xl border border-gray-200 bg-white">
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     className="flex w-full items-center justify-between p-5 text-left font-medium text-gray-800"
@@ -297,48 +253,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="main-footer bg-gray-900 py-16 text-white">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div>
-              <h2 className="mb-4 text-3xl font-bold">
-                Let's start work <span className="text-indigo-400">together!</span>
-              </h2>
-              <p className="mb-6">Partner with us to create intelligent, impactful, and future-ready AI solutions together.</p>
-            </div>
-            <div className="flex items-center justify-center md:justify-start">
-              <Link to="/contact" className="rounded bg-indigo-600 px-6 py-3 font-semibold transition hover:bg-indigo-700">
-                Let's Work Together
-              </Link>
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div>
-              <img src="/images/footer-logo.svg" alt="Aeravionix" className="mb-4 h-12" />
-            </div>
-            <div>
-              <h3 className="mb-2 text-lg font-semibold">Get In Touch</h3>
-              <p className="mb-1"><a href="tel:+00152885253" className="hover:text-indigo-400">+(00) - 152 885 253</a></p>
-              <p><a href="mailto:info@aeravionix.com" className="hover:text-indigo-400">info@aeravionix.com</a></p>
-              <h3 className="mt-6 mb-2 text-lg font-semibold">Our Location</h3>
-              <p>123 Lorem Street Suite 5B, Ips Park London, UK SW1A 1AA</p>
-            </div>
-            <div>
-              <h3 className="mb-2 text-lg font-semibold">Subscribe Newsletter</h3>
-              <form className="flex">
-                <input type="email" placeholder="Enter your email" className="w-full rounded-l border border-gray-700 bg-gray-800 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600" />
-                <button className="rounded-r bg-indigo-600 px-4 py-2 transition hover:bg-indigo-700">Subscribe</button>
-              </form>
-            </div>
-          </div>
-
-          <div className="mt-12 border-t border-gray-700 pt-6 text-center text-sm">
-            <p>Copyright © 2025 Aeravionix. All Rights Reserved.</p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

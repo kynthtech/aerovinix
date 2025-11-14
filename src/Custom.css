@@ -1,0 +1,358 @@
+/* Custom styles to complement Tailwind CSS in React components */
+
+/* CSS Variables */
+:root {
+  --primary-color: #FFFFFF;
+  --secondary-color: #0A0A0A;
+  --text-color: #A7AABB;
+  --bg-color: #060606;
+  --accent-color: #A93E17;
+  --accent-secondary-color: #15399A;
+  --divider-color: rgba(255, 255, 255, 0.06);
+  --dark-divider-color: rgba(255, 255, 255, 0.2);
+  --error-color: rgb(230, 87, 87);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar-track {
+  background-color: var(--primary-color);
+  border-left: 1px solid var(--primary-color);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  background-color: var(--primary-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-color) 0.26%, var(--accent-secondary-color) 99.99%);
+}
+
+::selection {
+  color: var(--primary-color);
+  background-color: var(--accent-color);
+  filter: invert(1);
+}
+
+/* Image Animation Effect */
+.image-anime {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-anime::after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 0%;
+  left: 50%;
+  top: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  z-index: 1;
+}
+
+.image-anime:hover::after {
+  height: 250%;
+  transition: all 600ms linear;
+  background-color: transparent;
+}
+
+/* Reveal Animation */
+.reveal {
+  position: relative;
+  display: inline-flex;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.reveal img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transform-origin: left;
+}
+
+/* Text Effect Animation */
+.text-effect .line {
+  width: 100%;
+  color: var(--dark-divider-color);
+  background: linear-gradient(120deg, var(--primary-color), var(--primary-color)) no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 0%;
+}
+
+/* Swiper Pagination Customization */
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--accent-color);
+}
+
+/* Keyframe Animations */
+@keyframes shape1 {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    transform: translateY(50px) rotate(360deg);
+  }
+}
+
+@keyframes shape2 {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    transform: translateY(50px) rotate(-360deg);
+  }
+}
+
+@keyframes rotate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading Animation */
+.loading-container,
+.loading {
+  height: 100px;
+  position: relative;
+  width: 100px;
+  border-radius: 100%;
+}
+
+.loading {
+  border: 1px solid transparent;
+  border-color: transparent var(--accent-color) transparent var(--accent-secondary-color);
+  animation: rotate-loading 1.5s linear 0s infinite normal;
+  transform-origin: 50% 50%;
+}
+
+/* Counter Animation Styles */
+.counter-animate {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(to right, var(--accent-color) 0%, var(--accent-secondary-color) 50%, var(--accent-color) 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.4s ease-in-out;
+}
+
+.gradient-text:hover {
+  background-position: right center;
+}
+
+/* Gradient Button */
+.gradient-button {
+  background: linear-gradient(to right, var(--accent-color) 0%, var(--accent-secondary-color) 50%, var(--accent-color) 100%);
+  background-size: 200% auto;
+  transition: all 0.4s ease-in-out;
+}
+
+.gradient-button:hover {
+  background-position: right center;
+}
+
+/* Icon Box Hover Effect */
+.icon-box-hover {
+  position: relative;
+  transition: all 0.4s ease-in-out;
+}
+
+.icon-box-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(120deg, var(--accent-color), var(--accent-secondary-color)) no-repeat;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  transform: scale(0);
+  transition: all 0.4s ease-in-out;
+}
+
+.icon-box-hover:hover::before {
+  transform: scale(1);
+}
+
+/* Skill Progress Bar Animation */
+.skill-progress-animate {
+  transition: width 1s ease-in-out;
+}
+
+/* Blockquote Style */
+.post-entry blockquote {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23A93E17"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>') no-repeat, var(--secondary-color);
+  background-position: 30px 30px;
+  background-size: 45px;
+}
+
+/* Video Gallery Play Button */
+.video-play-overlay {
+  position: relative;
+  transition: all 0.4s ease-in-out;
+}
+
+.video-play-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(10, 10, 10, 0.4);
+  border-radius: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+  transition: all 0.4s ease-in-out;
+}
+
+.video-play-overlay:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+/* Photo Gallery Hover */
+.photo-gallery-hover {
+  transition: all 0.3s ease-in-out;
+}
+
+.photo-gallery-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Testimonial Slider Custom Rotation */
+.testimonial-slider-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--divider-color);
+  border-radius: 20px;
+  transform: rotate(-9deg);
+  z-index: 0;
+}
+
+/* Accordion Arrow Rotation */
+.accordion-arrow {
+  transition: transform 0.3s ease-in-out;
+}
+
+.accordion-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Mobile Menu Animations */
+.mobile-menu-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.mobile-menu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Backdrop Blur Support */
+.backdrop-blur-custom {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Custom Border Gradient */
+.border-gradient {
+  border: 1px solid transparent;
+  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+              linear-gradient(to left, var(--accent-color), var(--accent-secondary-color)) border-box;
+}
+
+/* Project Image Hover */
+.project-image-hover img {
+  transition: all 0.4s ease-in-out;
+}
+
+.project-image-hover:hover img {
+  transform: scale(1.1);
+  filter: blur(5px);
+}
+
+/* Team Image Hover */
+.team-image-hover img {
+  transition: all 0.4s ease-in-out;
+}
+
+.team-image-hover:hover img {
+  transform: scale(1.1);
+}
+
+/* Service Card Hover */
+.service-card-hover {
+  transition: transform 0.4s ease-in-out;
+}
+
+.service-card-hover:hover {
+  transform: translateY(-5px);
+}
+
+/* React Photo View Override */
+.PhotoView-Slider__BannerWrap {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Custom Scrollbar for Specific Elements */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--secondary-color);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 3px;
+}
+
+/* Responsive utilities */
+@media (max-width: 1024px) {
+  .post-entry blockquote {
+    background-position: 20px 20px;
+    background-size: 40px;
+    padding: 20px 20px 20px 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .post-entry blockquote {
+    background-position: 15px 15px;
+    padding: 60px 15px 15px 15px;
+  }
+  
+  .testimonial-slider-wrapper::before {
+    transform: rotate(-6deg);
+  }
+}
