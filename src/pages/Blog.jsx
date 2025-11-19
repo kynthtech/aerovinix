@@ -1,153 +1,189 @@
-import { Link } from 'react-router-dom';
-import { useEffect,useState } from 'react';
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Blog() {
+  const [isLoading, setIsLoading] = useState(true);
 
-const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 1000);
+  }, []);
 
-useEffect(() => {
-  setTimeout(() => setIsLoading(false), 1000);
-}, []);
   const posts = [
     {
-      date: 'May 28, 2025',
-      title: 'Ethical AI Balancing Innovation and Responsibility',
-      excerpt: 'As AI continue to evolve, ensuring use more important than ever this article explores how businesses can innovate',
+      date: "Jan 12, 2025",
+      title: "Designing Reliable Flight Computers for Small Rockets",
+      excerpt:
+        "How modern avionics survive vibration, thermal stress, high-G loads, and rapid control loops during launch.",
+      image: "/images/blog/flight-computer.jpg",
+      body: `
+        Building avionics for small rockets is far more than choosing a microcontroller.
+        Launch vibration, EMI, thermal cycles, and extreme G-forces destroy weak systems.
+
+        At Aerovionix, we engineer flight computers with hardened sensor pipelines,
+        redundant IMUs, stable power rails, and deterministic firmware architectures.
+
+        Every module undergoes vibration testing, thermal stress screening, and
+        high-rate simulation long before flight.
+      `,
     },
     {
-      date: 'April 22, 2025',
-      title: "Machine Learning Demytified A Beginner's Guide",
-      excerpt: 'As AI continue to evolve, ensuring use more important than ever this article explores how businesses can innovate',
+      date: "Jan 05, 2025",
+      title: "Sensor Fusion for UAV Stability: IMU + GPS + Barometer Explained",
+      excerpt:
+        "How Kalman filtering blends noisy sensor inputs into a clean, stable flight-state estimate.",
+      image: "/images/blog/sensor-fusion.jpg",
+      body: `
+        UAV stability depends on good state estimation. Accelerometers drift,
+        gyros accumulate bias, GPS jumps, and barometers fluctuate.
+
+        Advanced Kalman filtering pipelines merge this data into clean, reliable
+        attitude estimates—even under aggressive maneuvers or GPS dropout.
+      `,
     },
     {
-      date: 'April 17, 2025',
-      title: 'How AI is Transforming Modern Businesses',
-      excerpt: 'As AI continue to evolve, ensuring use more important than ever this article explores how businesses can innovate',
+      date: "Dec 28, 2024",
+      title: "Telemetry Systems for Rockets: Designing Links That Never Drop",
+      excerpt:
+        "Why antenna placement, RF noise immunity, and data framing matter during launch.",
+      image: "/images/blog/telemetry.jpg",
+      body: `
+        Rocket telemetry is unforgiving. Rapid rotation, ascent speed,
+        and structural interference create hostile RF conditions.
+
+        Our telemetry systems use noise-resilient modulation, smart packet
+        framing, and optimized antenna placement to maintain a stable link
+        from launch to apogee.
+      `,
     },
     {
-      date: 'May 13, 2025',
-      title: 'Responsible AI Shaping a Better Future Innovation',
-      excerpt: 'As AI continue to evolve, ensuring use more important than ever this article explores how businesses can innovate',
+      date: "Dec 20, 2024",
+      title: "Testing Avionics for Extreme Launch Conditions",
+      excerpt:
+        "Environmental stress testing, vibration rigs, EMI screening—why aerospace hardware needs all of it.",
+      image: "/images/blog/testing.jpg",
+      body: `
+        Aerospace hardware must survive far more than bench tests.
+        We run vibration profiling, thermal shock cycles, and EMI screening
+        to expose weaknesses in electronics and firmware behavior.
+      `,
     },
     {
-      date: 'April 08, 2025',
-      title: 'Ethical Intelligence Driving Trust and Progress',
-      excerpt: 'As AI continue to evolve, ensuring use more important than ever this article explores how businesses can innovate',
+      date: "Dec 15, 2024",
+      title: "Guidance Algorithms for Small Launch Vehicles",
+      excerpt:
+        "How PID tuning, control theory, and nonlinear dynamics shape rocket trajectories.",
+      image: "/images/blog/guidance.jpg",
+      body: `
+        Guidance software keeps rockets stable under rapidly changing aerodynamic
+        conditions. Our control stack uses tuned PID loops and adaptive filtering
+        to maintain trajectory accuracy through ascent.
+      `,
     },
     {
-      date: 'April 02, 2025',
-      title: 'AI with Integrity Innovation You Can Trust',
-      excerpt: 'As AI continue to evolve, ensuring use more important than ever this article explores how businesses can innovate',
+      date: "Dec 10, 2024",
+      title: "Inside Aerovionix: Our Avionics Design Philosophy",
+      excerpt:
+        "The engineering mindset behind building mission-ready aerospace electronics.",
+      image: "/images/blog/philosophy.jpg",
+      body: `
+        Aerovionix builds avionics meant for real-world launch environments.
+        We combine embedded engineering, control theory, hardware simulation,
+        and aggressive field testing to produce systems that simply don't fail.
+      `,
     },
   ];
 
   return (
     <>
       {/* Preloader */}
-     {isLoading && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
           <div className="relative">
-            <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-indigo-600"></div>
-            <div className="absolute inset-0 m-auto flex h-8 w-8 items-center justify-center">
-              <div className="h-4 w-4 rounded-full bg-indigo-600"></div>
-            </div>
+            <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-700 border-t-indigo-500"></div>
+            <img
+              src="/images/loader.svg"
+              alt="Aeravionix"
+              className="absolute inset-0 m-auto h-8 w-8"
+            />
           </div>
         </div>
       )}
 
-
-      {/* Header with Active Nav */}
-      {/* <header className="sticky top-0 z-40 bg-white shadow-md">
-        <nav className="container mx-auto flex flex-wrap items-center justify-between px-4 py-4">
-          <Link to="/" className="flex items-center">
-            <img src="/images/logo.svg" alt="Aeravionix Logo" className="h-10" />
-          </Link>
-
-          <div className="hidden space-x-8 lg:flex">
-            <div className="group relative">
-              <button className={`font-medium transition ${isActive('/') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600'}`}>
-                Home
-              </button>
-              <div className="absolute left-0 mt-2 hidden w-48 rounded bg-white shadow-lg group-hover:block">
-                <Link to="/" className="block px-4 py-2 hover:bg-indigo-50">Home - Main</Link>
-                <Link to="/home-image" className="block px-4 py-2 hover:bg-indigo-50">Home - Image</Link>
-                <Link to="/home-video" className="block px-4 py-2 hover:bg-indigo-50">Home - Video</Link>
-              </div>
-            </div>
-
-            <Link to="/about" className={`font-medium transition ${isActive('/about') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600'}`}>About Us</Link>
-            <Link to="/services" className={`font-medium transition ${isActive('/services') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600'}`}>Services</Link>
-            <Link to="/blog" className="font-medium text-indigo-600">Blog</Link>
-
-            <div className="group relative">
-              <button className={`font-medium transition ${isActive('/pages') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600'}`}>
-                Pages
-              </button>
-              <div className="absolute left-0 mt-2 hidden w-56 rounded bg-white shadow-lg group-hover:block">
-                <Link to="/service-single" className="block px-4 py-2 hover:bg-indigo-50">Service Details</Link>
-                <Link to="/blog-single" className="block px-4 py-2 hover:bg-indigo-50">Blog Details</Link>
-                <Link to="/projects" className="block px-4 py-2 hover:bg-indigo-50">Projects</Link>
-                <Link to="/project-single" className="block px-4 py-2 hover:bg-indigo-50">Project Details</Link>
-                <Link to="/team" className="block px-4 py-2 hover:bg-indigo-50">Our Team</Link>
-                <Link to="/team-single" className="block px-4 py-2 hover:bg-indigo-50">Team Details</Link>
-                <Link to="/testimonials" className="block px-4 py-2 hover:bg-indigo-50">Testimonials</Link>
-                <Link to="/image-gallery" className="block px-4 py-2 hover:bg-indigo-50">Image Gallery</Link>
-                <Link to="/video-gallery" className="block px-4 py-2 hover:bg-indigo-50">Video Gallery</Link>
-                <Link to="/faqs" className="block px-4 py-2 hover:bg-indigo-50">FAQs</Link>
-                <Link to="/404" className="block px-4 py-2 hover:bg-indigo-50">404</Link>
-              </div>
-            </div>
-
-            <Link to="/contact" className={`font-medium transition ${isActive('/contact') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600'}`}>Contact Us</Link>
-          </div>
-
-          <Link to="/contact" className="rounded bg-indigo-600 px-5 py-2 text-white transition hover:bg-indigo-700">
-            Get Started
-          </Link>
-        </nav>
-      </header> */}
-
       {/* Page Header */}
-      <section className="page-header bg-gradient-to-br from-indigo-50 to-purple-100 py-20">
+      <section
+        className="page-header py-20 bg-black bg-cover bg-center bg-fixed"
+        style={{
+          backgroundImage: "url('/images/bg.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+        }}
+      >
         <div className="container mx-auto px-4 text-center">
-          <h1 className="mb-4 text-5xl font-extrabold text-gray-900 md:text-6xl">
-            Our <span className="text-indigo-600">blog</span>
+          <h1 className="mb-4 text-5xl font-extrabold text-white md:text-6xl">
+            Aerovionix <span className="text-indigo-500">Blog</span>
           </h1>
+
           <nav className="flex justify-center space-x-2 text-sm">
-            <Link to="/" className="text-gray-600 hover:text-indigo-600">home</Link>
-            <span className="text-gray-400">/</span>
-            <span className="text-indigo-600">blog</span>
+            <Link to="/" className="text-gray-400 hover:text-indigo-400">
+              home
+            </Link>
+            <span className="text-gray-500">/</span>
+            <span className="text-indigo-500">blog</span>
           </nav>
         </div>
       </section>
 
       {/* Blog Grid */}
-      <section className="page-blog py-20 bg-white">
+      <section
+        className="page-blog py-20 bg-black bg-cover bg-center bg-fixed"
+        style={{
+          backgroundImage: "url('/images/bg.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+        }}
+      >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, i) => (
               <article
                 key={i}
-                className="group overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-xl"
-                style={{ animationDelay: `${i * 0.2}s` }}
+                className="group overflow-hidden rounded-xl bg-gray-900 shadow-lg transition-all hover:shadow-xl hover:scale-[1.015]"
               >
+                {/* Image */}
+                <Link to="/blog-single" state={{ post }}>
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </Link>
+
                 {/* Meta */}
-                <div className="border-b border-gray-100 p-4">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <i className="fa-solid fa-calendar-days text-indigo-600"></i>
+                <div className="border-b border-gray-700 p-4">
+                  <div className="flex items-center gap-2 text-sm text-gray-300">
+                    <i className="fa-solid fa-calendar-days text-indigo-500"></i>
                     <span>{post.date}</span>
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-6">
-                  <h2 className="mb-3 text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition">
-                    <Link to="/blog-single">{post.title}</Link>
+                  <h2 className="mb-3 text-xl font-bold text-white group-hover:text-indigo-400 transition">
+                    <Link to="/blog-single" state={{ post }}>
+                      {post.title}
+                    </Link>
                   </h2>
-                  <p className="mb-4 text-gray-600 line-clamp-3">{post.excerpt}</p>
+
+                  <p className="mb-4 text-gray-400 line-clamp-3">
+                    {post.excerpt}
+                  </p>
+
                   <Link
                     to="/blog-single"
-                    className="inline-flex items-center text-indigo-600 font-medium hover:text-indigo-800 transition"
+                    state={{ post }}
+                    className="inline-flex items-center text-indigo-400 font-medium hover:text-indigo-300 transition"
                   >
                     read more
                     <i className="ml-1 fa-solid fa-arrow-right"></i>
@@ -156,30 +192,8 @@ useEffect(() => {
               </article>
             ))}
           </div>
-
-          {/* Pagination */}
-          <div className="mt-12 flex justify-center">
-            <nav className="inline-flex rounded-lg shadow-md">
-              <a href="#" className="px-4 py-2 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
-                <i className="fa-solid fa-angle-left"></i>
-              </a>
-              <a href="#" className="px-4 py-2 border-t border-b border-l border-gray-300 bg-indigo-600 text-white">
-                1
-              </a>
-              <a href="#" className="px-4 py-2 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
-                2
-              </a>
-              <a href="#" className="px-4 py-2 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
-                3
-              </a>
-              <a href="#" className="px-4 py-2 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
-                <i className="fa-solid fa-angle-right"></i>
-              </a>
-            </nav>
-          </div>
         </div>
       </section>
-
     </>
   );
 }

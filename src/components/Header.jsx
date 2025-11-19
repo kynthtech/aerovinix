@@ -37,7 +37,9 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 shadow-xl shadow-black/20">
+    <header className="sticky top-0 z-50  backdrop-blur-sm border-b border-gray-800 shadow-xl shadow-black/20"    style={{
+          backgroundImage: "url('/images/bg.png')",
+        }}>
       <nav className="container mx-auto flex items-center justify-between px-4 py-4">
         {/* Logo */}
         <Link to="/" className="flex items-center group">

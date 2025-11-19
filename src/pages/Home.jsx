@@ -414,7 +414,7 @@ export default function Home() {
                 label="Flight Computer Variants"
                 value={12}
                 suffix="+"
-                icon="/images/icons/flight-computer.png"
+                icon="/icons/c_panel_icon.png"
                 color="indigo"
               />
 
@@ -422,7 +422,7 @@ export default function Home() {
                 label="Test Flights Completed"
                 value={27}
                 suffix="+"
-                icon="/images/icons/rocket-launch.png"
+                icon="/icons/rocket_icon.png"
                 color="purple"
               />
 
@@ -430,7 +430,7 @@ export default function Home() {
                 label="Sensor Fusion Accuracy"
                 value={94}
                 suffix="%"
-                icon="/images/icons/sensor-fusion.png"
+                icon="/icons/sensor_icon.png"
                 color="blue"
                 chart="radial"
               />
@@ -439,7 +439,7 @@ export default function Home() {
                 label="Development Speed"
                 value={5}
                 suffix="x"
-                icon="/images/icons/lightning-fast.png"
+                icon="/icons/speed_icon.png"
                 color="cyan"
               />
             </div>
@@ -449,7 +449,7 @@ export default function Home() {
               <CapabilityCard
                 title="Real-Time Sensor Fusion"
                 description="IMU/GNSS integration with sub-degree accuracy. Live telemetry at 100Hz+"
-                icon="/images/icons/sensor-grid.png"
+                icon="/icons/wave_icon.png"
                 metrics={[
                   { label: 'Update Rate', value: '100 Hz' },
                   { label: 'Latency', value: '<10ms' },
@@ -461,7 +461,7 @@ export default function Home() {
               <CapabilityCard
                 title="Flight-Ready Avionics"
                 description="Ruggedized hardware tested in real launch conditions. Vibration, thermal, and EMI validated."
-                icon="/images/icons/avionics-board.png"
+                icon="/icons/chip_icon.png"
                 metrics={[
                   { label: 'Operating Temp', value: '-40° to 85°C' },
                   { label: 'Vibration', value: '20G tested' },
@@ -473,7 +473,7 @@ export default function Home() {
               <CapabilityCard
                 title="Autonomous Guidance"
                 description="Trajectory optimization, stability control, and real-time flight path correction."
-                icon="/images/icons/guidance-system.png"
+                icon="/icons/panel_icon.png"
                 metrics={[
                   { label: 'Control Loop', value: '500 Hz' },
                   { label: 'Stability', value: '±2° max' },
@@ -485,7 +485,7 @@ export default function Home() {
               <CapabilityCard
                 title="Rapid Integration"
                 description="Modular architecture. Pre-built drivers. Test suite included. Go from bench to flight in weeks, not months."
-                icon="/images/icons/integration-tools.png"
+                icon="/icons/grid_icon.png"
                 metrics={[
                   { label: 'Setup Time', value: '<1 day' },
                   { label: 'Test Coverage', value: '94%' },
@@ -497,128 +497,320 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Our Approach */}
-        <section className="our-approach py-20 bg-gray-950">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h3 className="mb-2 text-sm font-semibold uppercase text-indigo-400">Our mission</h3>
-              <h2 className="text-4xl font-bold text-white">
-                Driving innovation through intelligent <span className="text-indigo-400">technology</span>
-              </h2>
+{/* Our Approach - Aerovionix */}
+<section className="our-approach py-20 relative">
+  {/* Optional dark overlay for this section */}
+  <div className="absolute inset-0 bg-black/40 -z-10"></div>
+  
+  <div className="container relative z-10 mx-auto px-4">
+    {/* Header */}
+    <div className="text-center mb-16">
+      <h3 className="mb-3 text-sm font-semibold uppercase text-indigo-400 tracking-wider">Our Approach</h3>
+      <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+        Mission-Ready Avionics for <span className="text-indigo-400">Real Flight Conditions</span>
+      </h2>
+      <p className="mx-auto max-w-4xl text-lg text-gray-300 leading-relaxed">
+        Aerovionix designs and builds mission-ready avionics for small rockets, UAVs, and advanced aerospace systems. We focus on reliable flight computers, sensor-fusion pipelines, guidance algorithms, and telemetry systems engineered to perform under extreme launch and flight conditions.
+      </p>
+    </div>
+
+    {/* Mission / Vision / Values - 4 Cards in 2x2 Grid */}
+    <div className="max-w-6xl mx-auto mb-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {[
+          { 
+            title: 'Built for Extremes', 
+            text: 'Our hardware and software are tested against vibration, heat, high-G loads, signal noise, and rapid control-loop demands. Every module is validated to deliver accurate navigation and stable flight in the harshest scenarios.',
+            gradient: 'from-orange-500 to-red-600',
+            iconPath: 'M13 10V3L4 14h7v7l9-11h-7z'
+          },
+          { 
+            title: 'Proven by Testing', 
+            text: 'We combine embedded engineering, control theory, simulation, and real-world flight testing to validate every system. Our approach ensures reliability from concept to launch.',
+            gradient: 'from-blue-500 to-cyan-600',
+            iconPath: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+          },
+          { 
+            title: 'Faster Development', 
+            text: 'Shorten aerospace development cycles with plug-and-play avionics. Our systems give teams the tools to build, launch, and iterate faster — reducing integration time and accelerating mission success.',
+            gradient: 'from-purple-500 to-pink-600',
+            iconPath: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'
+          },
+          { 
+            title: 'Open & Adaptable', 
+            text: 'Built on open standards and modular architecture. Integrate with existing systems, customize for your mission, and maintain full control over your technology stack.',
+            gradient: 'from-green-500 to-emerald-600',
+            iconPath: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
+          }
+        ].map((item, i) => (
+          <div key={i} className="group flex gap-5 p-6 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-indigo-600/50 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20">
+            <div className={`flex-shrink-0 w-14 h-14 rounded-lg bg-gradient-to-br ${item.gradient} p-3 flex items-center justify-center`}>
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.iconPath} />
+              </svg>
             </div>
-
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-              <div>
-                {[
-                  { title: 'Our Mission', icon: 'icon-approach-1.svg' },
-                  { title: 'Our Vision', icon: 'icon-approach-2.svg' },
-                  { title: 'Our Goal', icon: 'icon-approach-3.svg' },
-                ].map((item, i) => (
-                  <div key={i} className="mb-8 flex gap-4">
-                    <img src={`/images/${item.icon}`} alt="" className="h-12 w-12 flex-shrink-0 brightness-110" />
-                    <div>
-                      <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                      <p className="text-gray-400">
-                        Our mission is to harness the power of AI to solve real-world problems. From automating tasks to delivering data-driven insights.
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="relative">
-                <img src="/images/approach-image.jpg" alt="Our Approach" className="w-full rounded-xl shadow-xl ring-1 ring-gray-700" />
-                <div className="absolute bottom-6 left-6 flex gap-6 text-white">
-                  <div className="rounded bg-indigo-600 p-4 text-center">
-                    <p className="text-3xl font-bold">
-                      <span ref={(el) => (counterRefs.current[4] = el)} data-count="15" data-suffix="+">0+</span>
-                    </p>
-                    <p className="text-sm">Business problem</p>
-                  </div>
-                  <div className="rounded bg-purple-600 p-4 text-center">
-                    <p className="text-3xl font-bold">
-                      <span ref={(el) => (counterRefs.current[5] = el)} data-count="2.3" data-suffix="+">0+</span>
-                    </p>
-                    <p className="text-sm">Business setup</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Services */}
-        <section className="our-services py-20 bg-gray-900">
-          <div className="container mx-auto px-4 text-center">
-            <h3 className="mb-2 text-sm font-semibold uppercase text-indigo-400">Our Services</h3>
-            <h2 className="mx-auto mb-12 max-w-3xl text-4xl font-bold text-white">
-              AI-driven design services for future <span className="text-indigo-400">innovations</span>
-            </h2>
-
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {['AI Strategy & Consulting', 'AI Integration & Deployment', 'Custom AI Solutions'].map((title, i) => (
-                <div key={`service-${title}`} className="group rounded-xl bg-gray-800 border border-gray-700 p-6 shadow-md transition hover:shadow-2xl hover:shadow-indigo-500/20">
-                  <h3 className="mb-3 text-xl font-semibold text-white">
-                    <Link to="/service-single" className="hover:text-indigo-400">{title}</Link>
-                  </h3>
-                  <p className="mb-6 text-gray-400">
-                    We assess your business, identify high impact AI opportunities, and guide you with a clear roadmap for implementation.
-                  </p>
-                  <img src={`/images/service-item-${i + 1}.png`} alt="" className="mx-auto h-48 object-contain" />
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-12">
-              <ul className="flex flex-wrap justify-center gap-4 text-sm text-gray-300">
-                {['AI UI/UX Design', 'Chatbot Design', 'Design Automation', 'Predictive UX', 'Personalized Experiences', 'Generative Branding', 'AI Analysis'].map((item, index) => (
-                  <li key={`tech-tag-${index}-${item}`} className="rounded-full bg-gray-800 border border-gray-700 px-4 py-2 shadow hover:bg-gray-700 transition">{item}</li>
-                ))}
-              </ul>
+            <div>
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-gray-400 leading-relaxed">
+                {item.text}
+              </p>
             </div>
           </div>
-        </section>
+        ))}
+      </div>
+    </div>
 
-        {/* How It Works */}
-        <section className="how-it-work py-20 bg-gray-950">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-              <div>
-                <h3 className="mb-2 text-sm font-semibold uppercase text-indigo-400">How It Works</h3>
-                <h2 className="mb-8 text-4xl font-bold text-white">
-                  Our process for smarter <span className="text-indigo-400">AI solutions</span>
-                </h2>
-                {[
-                  { step: '01', title: 'Discovery & Strategy', icon: 'icon-how-work-step-1.svg' },
-                  { step: '02', title: 'Data & Infrastructure Assessment', icon: 'icon-how-work-step-2.svg' },
-                  { step: '03', title: 'Custom AI Development', icon: 'icon-how-work-step-3.svg' },
-                  { step: '04', title: 'Optimization & Support', icon: 'icon-how-work-step-4.svg' },
-                ].map((item) => (
-                  <div key={`step-${item.step}`} className="mb-8 flex gap-4">
-                    <div className="flex-shrink-0">
-                      <img src={`/images/${item.icon}`} alt="" className="h-12 w-12 brightness-110" />
-                      <p className="mt-1 text-sm font-bold text-indigo-400">step {item.step}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                      <p className="text-gray-400">We dive deep into your goals and challenges to uncover high-impact AI opportunities and craft a clear.</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="relative">
-                <video autoPlay muted loop className="w-full rounded-xl shadow-xl ring-1 ring-gray-700">
-                  <source src="https://demo.awaikenthemes.com/assets/videos/nextmind-how-work-video.mp4" type="video/mp4" />
-                </video>
-                <p className="mt-6 text-lg text-gray-300">
-                  We help businesses design, build, and deploy intelligent solutions that drive real results. <Link to="/contact" className="text-indigo-400 hover:underline">Contact Now</Link>
-                </p>
-              </div>
+    {/* Key Technologies Section */}
+    <div className="pt-16 border-t border-gray-800">
+      <h3 className="text-center text-2xl font-bold text-white mb-12">
+        Core <span className="text-indigo-400">Technologies</span>
+      </h3>
+      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+        {[
+          { icon: '🖥️', label: 'Flight Computers', desc: 'Real-time control systems' },
+          { icon: '📡', label: 'Sensor Fusion', desc: 'Multi-sensor integration' },
+          { icon: '🎯', label: 'Guidance Algorithms', desc: 'Autonomous navigation' },
+          { icon: '📊', label: 'Telemetry Systems', desc: 'Live data streaming' }
+        ].map((tech, i) => (
+          <div key={i} className="text-center p-6 rounded-xl bg-gray-900/30 border border-gray-800 hover:border-indigo-600/50 transition-all duration-300 group">
+            <div className="text-5xl mb-3 group-hover:scale-110 transition-transform">
+              {tech.icon}
+            </div>
+            <h4 className="text-white font-semibold mb-1">{tech.label}</h4>
+            <p className="text-sm text-gray-500">{tech.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Call to Action */}
+    <div className="mt-16 text-center">
+      <Link 
+        to="/technology" 
+        className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-8 py-4 font-semibold text-white transition hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-600/50"
+      >
+        Explore Our Technology
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </Link>
+    </div>
+  </div>
+</section>
+ {/* Services - Aerovionix */}
+<section className="our-services py-20 relative">
+  {/* Optional overlay */}
+  <div className="absolute inset-0 bg-black/30 -z-10"></div>
+  
+  <div className="container relative z-10 mx-auto px-4">
+    {/* Header */}
+    <div className="text-center mb-16">
+      <h3 className="mb-3 text-sm font-semibold uppercase text-indigo-400 tracking-wider">
+        What We Offer
+      </h3>
+      <h2 className="mx-auto mb-6 max-w-4xl text-4xl md:text-5xl font-bold text-white leading-tight">
+        Flight-Ready Avionics & <span className="text-indigo-400">Aerospace Systems</span>
+      </h2>
+      <p className="mx-auto max-w-3xl text-lg text-gray-300">
+        From flight computers to telemetry pipelines, we deliver hardware and software designed for mission-critical aerospace applications.
+      </p>
+    </div>
+
+    {/* Service Cards */}
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+      {[
+        {
+          title: 'Flight Computer Systems',
+          icon: '🖥️',
+          description: 'High-performance embedded systems with real-time processing, redundant sensors, and failsafe mechanisms for reliable autonomous flight.',
+          features: ['Real-time OS', 'Sensor fusion', 'Redundant architecture'],
+          color: 'from-blue-600 to-cyan-600'
+        },
+        {
+          title: 'Telemetry & Communication',
+          icon: '📡',
+          description: 'Long-range RF telemetry, GPS tracking, and ground station software for live monitoring and data logging during flight.',
+          features: ['Live data streams', 'GPS integration', 'Ground station UI'],
+          color: 'from-purple-600 to-pink-600'
+        },
+        {
+          title: 'Guidance & Navigation',
+          icon: '🎯',
+          description: 'Autonomous flight algorithms, trajectory optimization, and control systems for precision landing and waypoint navigation.',
+          features: ['Autopilot systems', 'Trajectory planning', 'PID tuning'],
+          color: 'from-orange-600 to-red-600'
+        },
+        {
+          title: 'Custom Avionics Solutions',
+          icon: '⚙️',
+          description: 'Tailored flight electronics, power distribution boards, and sensor integration designed for your specific mission requirements.',
+          features: ['Custom PCB design', 'Power systems', 'Sensor selection'],
+          color: 'from-green-600 to-emerald-600'
+        },
+        {
+          title: 'Testing & Validation',
+          icon: '🔬',
+          description: 'Hardware-in-the-loop simulation, vibration testing, and thermal validation to ensure systems perform under real launch conditions.',
+          features: ['HITL simulation', 'Stress testing', 'Flight validation'],
+          color: 'from-indigo-600 to-violet-600'
+        },
+        {
+          title: 'Integration Support',
+          icon: '🔧',
+          description: 'Documentation, technical support, and hands-on assistance to integrate our avionics into your rocket, UAV, or aerospace platform.',
+          features: ['Technical docs', 'API libraries', 'Direct support'],
+          color: 'from-teal-600 to-blue-600'
+        }
+      ].map((service, i) => (
+        <div 
+          key={`service-${i}`} 
+          className="group relative rounded-2xl bg-gray-900/70 border border-gray-800 p-8 shadow-lg transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/20 hover:border-indigo-600/50 hover:-translate-y-2"
+        >
+          {/* Icon Badge */}
+          <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${service.color} mb-6 text-3xl shadow-lg`}>
+            {service.icon}
+          </div>
+
+          {/* Title */}
+          <h3 className="mb-4 text-2xl font-bold text-white group-hover:text-indigo-400 transition-colors">
+            <Link to="/service-single">{service.title}</Link>
+          </h3>
+
+          {/* Description */}
+          <p className="mb-6 text-gray-400 leading-relaxed">
+            {service.description}
+          </p>
+
+          {/* Features List */}
+          <ul className="space-y-2 mb-6">
+            {service.features.map((feature, idx) => (
+              <li key={idx} className="flex items-center gap-2 text-sm text-gray-300">
+                <svg className="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          {/* Learn More Link */}
+          <Link 
+            to="/service-single" 
+            className="inline-flex items-center gap-2 text-indigo-400 font-semibold hover:text-indigo-300 transition-colors group/link"
+          >
+            Learn More
+            <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+
+          {/* Hover Gradient Effect */}
+          <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none`}></div>
+        </div>
+      ))}
+    </div>
+
+    {/* Technology Tags */}
+    <div className="mt-16">
+      <h3 className="text-center text-xl font-bold text-white mb-8">
+        Core <span className="text-indigo-400">Technologies</span>
+      </h3>
+      <ul className="flex flex-wrap justify-center gap-3 text-sm">
+        {[
+          'STM32 / ARM Cortex',
+          'FreeRTOS',
+          'Kalman Filtering',
+          'IMU / GPS Integration',
+          'LoRa / RF Telemetry',
+          'PID Control',
+          'MAVLink Protocol',
+          'MATLAB Simulation',
+          'Altium PCB Design',
+          'C/C++ Embedded',
+          'Python Analysis',
+          'Data Logging'
+        ].map((tech, index) => (
+          <li 
+            key={`tech-${index}`} 
+            className="rounded-full bg-gray-900/60 border border-gray-700 px-5 py-2.5 text-gray-300 shadow hover:bg-gray-800 hover:border-indigo-600/50 hover:text-white transition-all duration-200 cursor-default"
+          >
+            {tech}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* CTA Section */}
+    <div className="mt-16 text-center">
+      <div className="inline-block rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 p-1">
+        <div className="rounded-xl bg-gray-900 px-8 py-6 backdrop-blur-sm">
+          <h3 className="text-2xl font-bold text-white mb-3">
+            Need Custom Avionics?
+          </h3>
+          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+            Let's discuss your mission requirements and build a solution tailored to your aerospace platform.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-8 py-3 font-semibold text-white transition hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-600/50"
+            >
+              Get in Touch
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+            <Link
+              to="/products"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-700 px-8 py-3 font-semibold text-white transition hover:border-indigo-600 hover:bg-indigo-600/10"
+            >
+              View Products
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+   {/* How It Works - Timeline Version */}
+<section className="how-it-work py-20">
+  <div className="container mx-auto px-4">
+    <h2 className="text-4xl font-bold text-white text-center mb-16">
+      Development <span className="text-indigo-400">Timeline</span>
+    </h2>
+
+    <div className="relative max-w-5xl mx-auto">
+      {/* Central timeline line */}
+      <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-600 via-purple-600 to-indigo-600 hidden lg:block"></div>
+
+      {[
+        { week: 'Week 1-2', title: 'Requirements', desc: 'Mission specs, environmental analysis, component selection', side: 'left' },
+        { week: 'Week 3-5', title: 'Design & Simulation', desc: 'PCB design, HITL testing, firmware development', side: 'right' },
+        { week: 'Week 6-8', title: 'Build & Test', desc: 'Manufacturing, assembly, thermal/vibration testing', side: 'left' },
+        { week: 'Week 9-12', title: 'Integration & Launch', desc: 'System integration, pre-flight checks, telemetry validation', side: 'right' }
+      ].map((phase, i) => (
+        <div key={i} className={`relative flex items-center mb-12 ${phase.side === 'left' ? 'lg:flex-row-reverse' : ''}`}>
+          <div className={`w-full lg:w-5/12 ${phase.side === 'left' ? 'lg:text-right lg:pr-12' : 'lg:pl-12'}`}>
+            <div className="p-6 rounded-xl bg-gray-900/70 border border-gray-800 hover:border-indigo-600/50 transition">
+              <span className="text-xs font-bold text-indigo-400">{phase.week}</span>
+              <h3 className="text-2xl font-bold text-white mt-2 mb-3">{phase.title}</h3>
+              <p className="text-gray-400">{phase.desc}</p>
             </div>
           </div>
-        </section>
+          
+          {/* Center dot */}
+          <div className="absolute left-1/2 w-6 h-6 bg-indigo-600 rounded-full border-4 border-gray-900 hidden lg:block -translate-x-1/2"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
         {/* Projects Portfolio */}
-        <section className="our-projects py-20 bg-gray-900">
+        <section className="our-projects py-20 ">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h3 className="mb-2 text-sm font-semibold uppercase text-indigo-400">Our Projects</h3>
@@ -677,7 +869,7 @@ export default function Home() {
         </section>
 
         {/* Facts/Stats Section */}
-        <section className="facts py-20 bg-gradient-to-br from-indigo-900 to-purple-900">
+        <section className="facts py-20 bg-gradient-to-br">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4 text-center">
               {[
@@ -696,7 +888,7 @@ export default function Home() {
         </section>
 
         {/* What We Do */}
-        <section className="what-we-do py-20 bg-gray-950">
+        <section className="what-we-do py-20">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
               <div>
@@ -734,7 +926,7 @@ export default function Home() {
         </section>
 
         {/* Testimonials */}
-        <section className="testimonials py-20 bg-gray-900">
+        <section className="testimonials py-20 ">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
               <div>
@@ -805,7 +997,7 @@ export default function Home() {
         </section>
 
         {/* Image Gallery */}
-        <section className="gallery py-20 bg-gray-950">
+        <section className="gallery py-20 ">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h3 className="mb-2 text-sm font-semibold uppercase text-indigo-400">Our Gallery</h3>
@@ -851,7 +1043,7 @@ export default function Home() {
         </section>
 
         {/* FAQ Section */}
-        <section className="faq py-20 bg-gray-900">
+        <section className="faq py-20 ">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h3 className="mb-2 text-sm font-semibold uppercase text-indigo-400">FAQ</h3>
@@ -924,7 +1116,7 @@ export default function Home() {
         </section>
 
         {/* Blog Section */}
-        <section className="blog py-20 bg-gray-950">
+        <section className="blog py-20 ">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h3 className="mb-2 text-sm font-semibold uppercase text-indigo-400">Our Blog</h3>
@@ -973,7 +1165,7 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="cta py-20 bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-900">
+        <section className="cta py-20 bg-gradient-to-r ">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
               Ready to Transform Your Business?

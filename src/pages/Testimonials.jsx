@@ -1,33 +1,96 @@
-import { useState , useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
 export default function Testimonials() {
-
-
   const testimonials = [
-    { name: 'Jenny W', role: 'fintech startup', img: 'author-1.jpg' },
-    { name: 'jason m', role: 'hardware Technician', img: 'author-2.jpg', active: true },
-    { name: 'Lauren M', role: 'hardware Technician', img: 'author-3.jpg' },
-    { name: 'Mason D', role: 'fintech startup', img: 'author-4.jpg' },
-    { name: 'Ethan R', role: 'fintech startup', img: 'author-5.jpg' },
-    { name: 'Logan P', role: 'fintech startup', img: 'author-6.jpg' },
+    {
+      name: 'Arjun M',
+      role: 'Launch Operations – Small Rocket Lab',
+      img: 'author-1.jpg',
+      text: '“Aerovionix helped us stabilise flight telemetry during high-vibration stages. Their avionics stack reduced packet loss by 68%, allowing us to finally complete a full sub-orbital flight test without blind spots.”'
+    },
+    {
+      name: 'Jason M',
+      role: 'Hardware Technician – Aerospace R&D',
+      img: 'author-2.jpg',
+      active: true,
+      text: '“Their embedded firmware tuning literally saved us weeks of debugging. Ultra-low-latency sensor fusion? Delivered. Clean signal acquisition? Delivered. These guys know their flight electronics.”'
+    },
+    {
+      name: 'Lauren M',
+      role: 'Systems Engineer – UAV Manufacturing',
+      img: 'author-3.jpg',
+      text: '“Aerovionix redesigned our power distribution board to handle dynamic loads in extreme conditions. Zero brownouts since implementation. Truly mission-critical engineering.”'
+    },
+    {
+      name: 'Mason D',
+      role: 'Drone Startup Founder',
+      img: 'author-4.jpg',
+      text: '“Their custom autopilot logic improved our drone hover stability by over 40%. Honestly, this is the level of engineering you expect from aerospace labs, not startups.”'
+    },
+    {
+      name: 'Ethan R',
+      role: 'Telemetry Lead – High-Power Rocketry',
+      img: 'author-5.jpg',
+      text: '“Our long-range RF link finally works as intended. Aerovionix helped us optimise antenna geometry and signal processing. Range increased from 1.2 km to 6.8 km.”'
+    },
+    {
+      name: 'Logan P',
+      role: 'Prototype Lab Technician',
+      img: 'author-6.jpg',
+      text: '“Their deep understanding of microcontrollers + sensors + protocol tuning helped us push our product from ‘prototype’ to ‘field-ready hardware’. Highly recommended.”'
+    }
   ];
 
   const facts = [
-    { title: 'Proven Technical Expertise', count: 15, suffix: '+', desc: 'Years of AI-Driven Design', content: 'Our team brings deep experience in machine learning, data engineering, and full-stack development.' },
-    { title: 'Highly customizable solutions', count: 200, suffix: '+', desc: 'Projects Successfully Delivered', content: 'We don\'t believe in one size fits all. Every solution is tailored to your business needs and workflows.' },
-    { title: 'Focus on real results', count: 95, suffix: '%', desc: 'Client Satisfaction Rate', content: 'We build AI that\'s safe, transparent, and responsible designed with security & compliance from day one.' },
+    {
+      title: 'Flight-Ready Engineering',
+      count: 15,
+      suffix: '+',
+      desc: 'Years Combined Experience',
+      content: 'Our team has worked across avionics, embedded systems, real-time firmware, and aerospace test environments.'
+    },
+    {
+      title: 'Mission-Critical Builds',
+      count: 120,
+      suffix: '+',
+      desc: 'Hardware / Firmware Projects Delivered',
+      content: 'From custom autopilots to RF telemetry systems, our builds are tailored for real-world performance.'
+    },
+    {
+      title: 'System Reliability',
+      count: 98,
+      suffix: '%',
+      desc: 'Client Success Rate',
+      content: 'Every Aerovionix system is tested for stability, noise resistance, and extreme-condition reliability.'
+    }
   ];
 
   const faqs = [
-    { q: 'What services does your AI agency offer?', a: 'Project timelines vary depending on complexity but typically range from 4 to 12 weeks. We provide a clear roadmap during the discovery phase.' },
-    { q: 'Do I need a large amount of data to use AI?', a: 'Project timelines vary depending on complexity but typically range from 4 to 12 weeks. We provide a clear roadmap during the discovery phase.', open: true },
-    { q: 'How long does it take to develop an AI solution?', a: 'Project timelines vary depending on complexity but typically range from 4 to 12 weeks. We provide a clear roadmap during the discovery phase.' },
-    { q: 'Is my data secure with you?', a: 'Project timelines vary depending on complexity but typically range from 4 to 12 weeks. We provide a clear roadmap during the discovery phase.' },
-    { q: 'Can you integrate AI into our existing systems?', a: 'Project timelines vary depending on complexity but typically range from 4 to 12 weeks. We provide a clear roadmap during the discovery phase.' },
+    {
+      q: 'Can Aerovionix build custom avionics hardware?',
+      a: 'Yes. We design flight computers, sensor boards, power systems, telemetry modules, and embedded control units from scratch.'
+    },
+    {
+      q: 'Do you support rocket, drone, and robotics projects?',
+      a: 'Absolutely. Our team has experience in UAVs, model rockets, sounding rockets, autonomous rovers, and industrial robotics.',
+      open: true
+    },
+    {
+      q: 'Can Aerovionix optimise existing hardware?',
+      a: 'Yes — we tune firmware, stabilise sensor outputs, reduce noise, improve RF range, and debug failing PCB designs.'
+    },
+    {
+      q: 'Do you work with startups?',
+      a: 'Most of our clients are startups or research teams building new aerospace hardware.'
+    },
+    {
+      q: 'Can you integrate Aerovionix systems into existing platforms?',
+      a: 'Yes — we integrate with CAN, UART, MAVLink, SBUS, custom protocols, and proprietary vendor APIs.'
+    }
   ];
 
   const [openIndex, setOpenIndex] = useState(1);
@@ -36,7 +99,6 @@ export default function Testimonials() {
     const [count, setCount] = useState(0);
     const { ref, inView } = useInView({ triggerOnce: true });
 
-    // eslint-disable-next-line no-undef
     useEffect(() => {
       if (inView) {
         let start = 0;
@@ -58,163 +120,130 @@ export default function Testimonials() {
 
     return <span ref={ref}>{count}{suffix}</span>;
   };
-const [isLoading, setIsLoading] = useState(true);
 
-useEffect(() => {
-  setTimeout(() => setIsLoading(false), 1000);
-}, []);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 800);
+  }, []);
+
   return (
     <>
-      {/* Preloader */}
+      {/* PRELOADER */}
       {isLoading && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
           <div className="relative">
-          <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-indigo-600"></div>
-          <img src="/images/loader.svg" alt="Aeravionix" className="absolute inset-0 m-auto h-8 w-8" />
+            <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-700 border-t-indigo-500"></div>
+            <img src="/images/loader.svg" alt="Aerovionix" className="absolute inset-0 m-auto h-8 w-8" />
+          </div>
         </div>
-      </div>)}
+      )}
 
-
-      {/* Page Header */}
-      <section className="page-header bg-gradient-to-br from-indigo-50 to-purple-100 py-20">
+      {/* HEADER */}
+      <section className="page-header bg-gradient-to-br from-gray-900 to-black py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="mb-4 text-5xl font-extrabold text-gray-900 md:text-6xl">
-            Our <span className="text-indigo-600">testimonials</span>
+          <h1 className="mb-4 text-5xl font-extrabold text-white md:text-6xl">
+            Aerovionix <span className="text-indigo-400">testimonials</span>
           </h1>
-          <nav className="flex justify-center space-x-2 text-sm">
-            <Link to="/" className="text-gray-600 hover:text-indigo-600">home</Link>
-            <span className="text-gray-400">/</span>
-            <span className="text-indigo-600">testimonials</span>
+          <nav className="flex justify-center space-x-2 text-sm text-gray-400">
+            <Link to="/" className="hover:text-indigo-400">home</Link>
+            <span>/</span>
+            <span className="text-indigo-400">testimonials</span>
           </nav>
         </div>
       </section>
 
-      {/* Testimonials Grid */}
-      <section className="page-testimonials py-20 bg-white">
+      {/* TESTIMONIAL CARDS */}
+      <section className="page-testimonials py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((t, i) => (
               <div
                 key={i}
-                className={`rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 p-6 shadow-lg transition-all ${t.active ? 'ring-2 ring-indigo-600' : 'hover:shadow-xl'}`}
-                style={{ animationDelay: `${i * 0.2}s` }}
+                className={`rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 p-6 shadow-lg transition-all ${
+                  t.active ? 'ring-2 ring-indigo-500' : 'hover:shadow-xl'
+                }`}
               >
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <PhotoProvider>
                       <PhotoView src={`/images/${t.img}`}>
-                        <img src={`/images/${t.img}`} alt={t.name} className="h-14 w-14 rounded-full object-cover cursor-pointer" />
+                        <img
+                          src={`/images/${t.img}`}
+                          alt={t.name}
+                          className="h-14 w-14 rounded-full object-cover cursor-pointer"
+                        />
                       </PhotoView>
                     </PhotoProvider>
+
                     <div>
-                      <h3 className="font-bold capitalize">{t.name}</h3>
-                      <p className="text-sm text-gray-600">{t.role}</p>
+                      <h3 className="font-bold text-white capitalize">{t.name}</h3>
+                      <p className="text-sm text-gray-400">{t.role}</p>
                     </div>
                   </div>
-                  <img src="/images/testimonials-quotes-img.svg" alt="" className="h-10 w-10 opacity-50" />
+
+                  <img
+                    src="/images/testimonials-quotes-img.svg"
+                    alt=""
+                    className="h-10 w-10 opacity-40"
+                  />
                 </div>
-                <p className="text-gray-700">
-                  "Working with this team we game-changer. The AI-enhanced they delivered helped reduce bounce rates by 40% engagement like never before."
-                </p>
+
+                <p className="text-gray-300">{t.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* What We Do */}
-      <section className="what-we-do bg-gray-50 py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            <div>
-              <h3 className="mb-6 text-2xl font-bold text-indigo-600">
-                We fuse AI and creativity to deliver intelligent, personalized, and future-ready design experiences that inspire.
-              </h3>
-              <img src="/images/what-we-do-img.png" alt="" className="mb-6 w-full rounded-xl shadow-lg" />
-              <ul className="grid grid-cols-2 gap-3 text-sm font-medium">
-                {['UI/UX Design', 'Chatbot Design', 'Predictive', 'Design Automation', 'Generative Branding'].map((item) => (
-                  <li key={item} className="rounded bg-white px-4 py-2 text-center shadow">{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex flex-col justify-center">
-              <h3 className="mb-2 text-xl font-semibold text-indigo-600">what we do</h3>
-              <h2 className="mb-4 text-3xl font-bold text-gray-900">
-                Innovative AI services, real-world <span className="text-indigo-600">results</span>
-              </h2>
-              <p className="mb-8 text-gray-600">
-                We craft cutting-edge AI solutions tailored to your business needs—driving smarter decisions, streamlined operations.
-              </p>
-              <ul className="mb-8 space-y-2 text-lg font-medium">
-                {['Computer Vision', 'AI Integration', 'Ongoing Support', 'AI Strategy', 'Custom AI Development'].map((item) => (
-                  <li key={item} className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-indigo-600"></span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/contact" className="inline-block rounded bg-indigo-600 px-6 py-3 font-semibold text-white transition hover:bg-indigo-700">
-                contact us
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Facts */}
-      <section className="our-facts py-20 bg-white">
+      {/* FACTS */}
+      <section className="our-facts py-20 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="mb-2 text-xl font-semibold text-indigo-600">Our facts</h3>
-          <h2 className="mb-12 text-3xl font-bold text-gray-900">
-            Why leading brands trust us to deliver smart <span className="text-indigo-600">AI solutions</span>
+          <h3 className="mb-2 text-xl font-semibold text-indigo-400">Our Numbers</h3>
+          <h2 className="mb-12 text-3xl font-bold text-white">
+            Why aerospace teams trust <span className="text-indigo-400">Aerovionix</span>
           </h2>
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {facts.map((fact, i) => (
-              <div key={i} className="rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 p-8 shadow-lg">
-                <h3 className="mb-4 text-xl font-bold">{fact.title}</h3>
-                <div className="mb-4 text-5xl font-bold text-indigo-600">
+              <div key={i} className="rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 p-8 shadow-lg">
+                <h3 className="mb-4 text-xl font-bold text-white">{fact.title}</h3>
+                <div className="mb-4 text-5xl font-bold text-indigo-400">
                   <Counter value={fact.count} suffix={fact.suffix} />
                 </div>
-                <p className="mb-2 text-sm text-gray-600">{fact.desc}</p>
-                <p className="text-gray-700">{fact.content}</p>
+                <p className="mb-2 text-sm text-gray-400">{fact.desc}</p>
+                <p className="text-gray-300">{fact.content}</p>
               </div>
             ))}
           </div>
-
-          <p className="mt-12 text-lg">
-            <span className="font-bold text-indigo-600">Free</span> Let's make something great work together.{' '}
-            <Link to="/contact" className="font-bold text-indigo-600 underline">Get Free Quote</Link>
-          </p>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="our-faqs py-20 bg-gray-50">
+      <section className="our-faqs py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <div>
-              <h3 className="mb-2 text-xl font-semibold text-indigo-600">faq's</h3>
-              <h2 className="mb-6 text-3xl font-bold text-gray-900">
-                Your AI questions, expertly <span className="text-indigo-600">answered here</span>
+              <h3 className="mb-2 text-xl font-semibold text-indigo-400">faq's</h3>
+              <h2 className="mb-6 text-3xl font-bold text-white">
+                Aerovionix technical <span className="text-indigo-400">FAQ</span>
               </h2>
-              <Link to="/faqs" className="inline-block rounded bg-indigo-600 px-6 py-3 font-semibold text-white transition hover:bg-indigo-700">
-                View all faqs
-              </Link>
             </div>
 
             <div className="space-y-4">
               {faqs.map((faq, i) => (
-                <div key={i} className="rounded-lg bg-white shadow-md">
+                <div key={i} className="rounded-lg bg-gray-900 shadow-md">
                   <button
                     onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-                    className="flex w-full items-center justify-between px-6 py-4 text-left font-semibold text-gray-900"
+                    className="flex w-full items-center justify-between px-6 py-4 text-left font-semibold text-white"
                   >
                     {i + 1}. {faq.q}
-                    <span className={`transform transition ${openIndex === i ? 'rotate-180' : ''}`}>Down Arrow</span>
+                    <span className={`transform transition ${openIndex === i ? 'rotate-180' : ''}`}>
+                      ▼
+                    </span>
                   </button>
                   {openIndex === i && (
-                    <div className="border-t border-gray-200 px-6 py-4 text-gray-700">
+                    <div className="border-t border-gray-700 px-6 py-4 text-gray-300">
                       {faq.a}
                     </div>
                   )}
@@ -224,7 +253,6 @@ useEffect(() => {
           </div>
         </div>
       </section>
-
     </>
   );
 }

@@ -1,15 +1,27 @@
-import { useState, useEffect } from 'react';
-import { Link, } from 'react-router-dom';
-import { PhotoProvider, PhotoView } from 'react-photo-view';
-import 'react-photo-view/dist/react-photo-view.css';
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import { useInView } from "react-intersection-observer";
+import "react-photo-view/dist/react-photo-view.css";
 
 export default function TeamSingle() {
+  const { state } = useLocation();
+  const member = state?.member;
 
+  // If opened manually, you can fallback or redirect
+  if (!member) {
+    return (
+      <div className="text-center text-white p-20 bg-black">
+        <h2>No Team Member Selected</h2>
+        <Link to="/team" className="text-indigo-400 underline">Back to Team</Link>
+      </div>
+    );
+  }
 
-  // Skills Progress Animation
+  // Skill Bar Component
   const SkillBar = ({ label, percent }) => {
     const [width, setWidth] = useState(0);
-    const { ref, inView } = inView({ triggerOnce: true });
+    const { ref, inView } = useInView({ triggerOnce: true });
 
     useEffect(() => {
       if (inView) {
@@ -20,90 +32,95 @@ export default function TeamSingle() {
 
     return (
       <div ref={ref} className="mb-6">
-        <div className="flex justify-between mb-1 text-sm">
-          <span className="font-medium">{label}</span>
-          <span className="font-bold text-indigo-600">{percent}%</span>
+        <div className="flex justify-between mb-1 text-sm text-gray-300">
+          <span>{label}</span>
+          <span className="font-bold text-indigo-400">{percent}%</span>
         </div>
-        <div className="h-3 rounded-full bg-gray-200 overflow-hidden">
+        <div className="h-3 rounded-full bg-gray-700 overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-indigo-500 to-purple-600 transition-all duration-1000"
             style={{ width: `${width}%` }}
-          />
+          ></div>
         </div>
       </div>
     );
   };
 
-  // Contact Form State
-  const [formData, setFormData] = useState({
-    fname: '', lname: '', phone: '', email: '', message: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Message sent! (Demo)');
-    console.log(formData);
-  };
-
   return (
     <>
       {/* Preloader */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
         <div className="relative">
-          <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-indigo-600"></div>
-          <img src="/images/loader.svg" alt="Aeravionix" className="absolute inset-0 m-auto h-8 w-8" />
+          <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-800 border-t-indigo-500"></div>
+          <img
+            src="/images/loader.svg"
+            alt="loading"
+            className="absolute inset-0 m-auto h-8 w-8"
+          />
         </div>
       </div>
 
+      {/* Header */}
+      <section
+        className="py-20 bg-cover bg-center relative"
+        style={{ backgroundImage: "url('/images/bg.png')" }}
+      >
+        <div className="absolute inset-0 bg-black/80"></div>
 
-
-      {/* Page Header */}
-      <section className="page-header bg-gradient-to-br from-indigo-50 to-purple-100 py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="mb-4 text-5xl font-extrabold text-gray-900 md:text-6xl">
-            Darrell <span className="text-indigo-600">steward</span>
+        <div className="relative container mx-auto px-4 text-center text-white">
+          <h1 className="text-5xl md:text-6xl font-extrabold">
+            {member.name} <span className="text-indigo-400">Profile</span>
           </h1>
-          <nav className="flex justify-center space-x-2 text-sm">
-            <Link to="/" className="text-gray-600 hover:text-indigo-600">home</Link>
-            <span className="text-gray-400">/</span>
-            <Link to="/team" className="text-gray-600 hover:text-indigo-600">team</Link>
-            <span className="text-gray-400">/</span>
-            <span className="text-indigo-600">Darrell steward</span>
+
+          <nav className="flex justify-center space-x-2 text-sm mt-4">
+            <Link to="/" className="text-gray-400 hover:text-indigo-400">
+              home
+            </Link>
+            <span>/</span>
+            <Link to="/team" className="text-gray-400 hover:text-indigo-400">
+              team
+            </Link>
+            <span>/</span>
+            <span className="text-indigo-400">{member.name}</span>
           </nav>
         </div>
       </section>
 
-      {/* Team Single Content */}
-      <section className="page-team-single py-20 bg-white">
+      {/* Page Content */}
+      <section className="py-20 bg-[#0b0f17] text-gray-300">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-            {/* Sidebar */}
+
+            {/* Sidebar Image */}
             <aside className="lg:col-span-4">
               <PhotoProvider>
-                <PhotoView src="/images/team-1.jpg">
-                  <img src="/images/team-1.jpg" alt="Darrell Steward" className="w-full rounded-xl shadow-lg cursor-pointer transition hover:shadow-2xl" />
+                <PhotoView src={`/images/${member.img}`}>
+                  <img
+                    src={`/images/${member.img}`}
+                    className="rounded-xl shadow-xl cursor-pointer border border-gray-700 hover:border-indigo-500 transition"
+                  />
                 </PhotoView>
               </PhotoProvider>
 
               {/* CTA Box */}
-              <div className="mt-8 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-700 p-6 text-white shadow-xl">
-                <img src="/images/sidebar-cta-logo.svg" alt="" className="mb-4 h-12" />
-                <h3 className="mb-2 text-xl font-bold">We're here help!</h3>
-                <p className="mb-6 text-sm">
-                  Need assistance? We're here to help with support, guidance, and resources. Reach out to us anytime.
+              <div className="mt-8 rounded-xl bg-gradient-to-br from-indigo-700 to-purple-900 p-6 text-white shadow-xl">
+                <img src="/images/sidebar-cta-logo.svg" className="h-12 mb-4" />
+                <h3 className="text-xl font-bold mb-2">Need Assistance?</h3>
+                <p className="text-sm mb-6 text-indigo-100">
+                  For avionics inquiries, collaborations, or technical support –
+                  reach out anytime.
                 </p>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex items-center gap-2">
-                    <img src="/images/icon-phone-gradiant.svg" alt="" className="h-5 w-5" />
-                    <a href="tel:+00152885253">+(00) - 152 885 253</a>
+
+                <ul className="text-sm space-y-3">
+                  <li>
+                    <a href="tel:+00152885253" className="hover:text-indigo-300">
+                      📞 +1 528 885 253
+                    </a>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <img src="/images/icon-mail-gradiant.svg" alt="" className="h-5 w-5" />
-                    <a href="mailto:support@aeravionix.com">support@aeravionix.com</a>
+                  <li>
+                    <a href="mailto:support@aerovionix.com" className="hover:text-indigo-300">
+                      ✉ support@aerovionix.com
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -111,144 +128,123 @@ export default function TeamSingle() {
 
             {/* Main Content */}
             <main className="lg:col-span-8">
-              {/* About Me */}
-              <div>
-                <h3 className="mb-2 text-xl font-semibold text-indigo-600">Hacking specialist</h3>
-                <h2 className="mb-4 text-3xl font-bold text-gray-900">
-                  About <span className="text-indigo-600">me</span>
-                </h2>
-                <p className="mb-6 text-gray-600">
-                  Integrating AI technologies seamlessly into your business infrastructure is key to unlocking new levels of efficiency, innovation, and growth.
-                </p>
 
-                {/* Social Links */}
-                <div className="flex space-x-3">
-                  {['pinterest-p', 'x-twitter', 'facebook-f', 'instagram'].map((icon) => (
-                    <a
-                      key={icon}
-                      href="#"
-                      className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-indigo-600 hover:text-white"
-                    >
-                      <i className={`fa-brands fa-${icon}`}></i>
-                    </a>
-                  ))}
-                </div>
+              {/* About */}
+              <h3 className="text-indigo-400 text-xl font-semibold">
+                {member.role}
+              </h3>
+
+              <h2 className="text-3xl text-white font-bold mt-2 mb-6">
+                About <span className="text-indigo-400">Engineer</span>
+              </h2>
+
+              <p className="leading-relaxed text-gray-300 mb-6">
+                {member.role} at Aerovionix, specializing in mission-critical
+                avionics, sensor fusion, embedded flight-control systems,
+                high-reliability hardware, and aerospace-grade firmware.
+              </p>
+
+              {/* Social */}
+              <div className="flex space-x-3 mb-12">
+                {["linkedin-in", "github", "x-twitter"].map((icon) => (
+                  <a
+                    key={icon}
+                    href="#"
+                    className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-300 hover:bg-indigo-600 hover:text-white transition"
+                  >
+                    <i className={`fa-brands fa-${icon}`}></i>
+                  </a>
+                ))}
               </div>
 
               {/* Contact Info */}
-              <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 {[
-                  { label: 'phone', value: <a href="tel:+00152885253">+(00) - 152 885 253</a> },
-                  { label: 'email', value: <a href="mailto:info@aeravionix.com">info@aeravionix.com</a> },
-                  { label: 'location', value: 'Glenholme street, USA' },
+                  { label: "phone", value: "+1 528 885 253" },
+                  { label: "email", value: "info@aerovionix.com" },
+                  { label: "location", value: "AeroVionix HQ — Bengaluru" },
                 ].map((item) => (
-                  <div key={item.label} className="rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 p-6">
-                    <h3 className="mb-1 text-sm font-semibold uppercase text-gray-500">{item.label}</h3>
-                    <p className="text-lg font-medium text-indigo-700">{item.value}</p>
+                  <div
+                    key={item.label}
+                    className="p-6 rounded-xl bg-[#111726] border border-gray-700"
+                  >
+                    <h4 className="uppercase text-sm text-gray-400">{item.label}</h4>
+                    <p className="text-indigo-400 text-lg">{item.value}</p>
                   </div>
                 ))}
               </div>
 
-              {/* Skills */}
-              <div className="mt-12">
-                <h2 className="mb-6 text-3xl font-bold text-gray-900">
-                  My <span className="text-indigo-600">expertise</span>
-                </h2>
-                <div className="space-y-6">
-                  <SkillBar label="AI Development" percent={95} />
-                  <SkillBar label="Data Analytics" percent={80} />
-                  <SkillBar label="Machine Learning" percent={85} />
-                  <SkillBar label="Automation Solutions" percent={62} />
-                </div>
-              </div>
+              {/* Expertise */}
+              <h2 className="text-3xl text-white font-bold mb-6">
+                Engineering <span className="text-indigo-400">Expertise</span>
+              </h2>
 
-              {/* Career Guidelines */}
-              <div className="mt-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 p-8">
-                <h2 className="mb-6 text-3xl font-bold text-gray-900">
-                  Career <span className="text-indigo-600">guidelines</span>
+              <SkillBar label="Embedded Avionics Firmware" percent={92} />
+              <SkillBar label="Flight Computer Architecture" percent={88} />
+              <SkillBar label="Telemetry & RF Systems" percent={78} />
+              <SkillBar label="Sensor Fusion / GNC" percent={84} />
+
+              {/* Guidelines / Description */}
+              <div className="mt-12 p-8 bg-[#111726] rounded-xl border border-gray-700">
+                <h2 className="text-3xl text-white font-bold mb-4">
+                  Engineering <span className="text-indigo-400">Focus Areas</span>
                 </h2>
-                <ul className="space-y-3 text-gray-700">
-                  {[
-                    'We help you map out a career path that align ai',
-                    'We provide expert advice to craft compelling',
-                    'Our guidance emphasizes building critical skills',
-                    'Stay updated with the latest industry trends',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-indigo-600"></span>
-                      {item}
-                    </li>
-                  ))}
+
+                <ul className="space-y-3 text-gray-300">
+                  <li>• High-reliability embedded avionics systems</li>
+                  <li>• Multi-sensor fusion (IMU, GPS, Baro, Magnetometer)</li>
+                  <li>• Rocket telemetry & low-latency RF links</li>
+                  <li>• GNC algorithms for micro-launch vehicles</li>
+                  <li>• Flight-computer hardware validation</li>
+                  <li>• Aerospace firmware stress testing</li>
                 </ul>
               </div>
 
               {/* Contact Form */}
-              <div className="mt-12">
-                <h2 className="mb-4 text-3xl font-bold text-gray-900">
-                  Contact <span className="text-indigo-600">form</span>
-                </h2>
-                <p className="mb-8 text-gray-600">
-                  I'm here to guide you on your AI journey and help you unlock transformative results. Whether you're aiming to optimize processes, enhance decision-making, or drive innovation, I'll support you every step of the way.
-                </p>
+              <h2 className="text-3xl text-white font-bold mt-16 mb-6">
+                Contact <span className="text-indigo-400">Engineer</span>
+              </h2>
 
-                <h3 className="mb-6 text-2xl font-bold text-gray-900">
-                  Have any <span className="text-indigo-600">questions?</span>
-                </h3>
+              <p className="text-gray-400 mb-8">
+                For avionics consultation, collaborations, or technical discussions—reach out below.
+              </p>
 
-                <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <input
-                    type="text"
-                    name="fname"
-                    placeholder="First Name"
-                    required
-                    className="rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                    onChange={handleChange}
-                  />
-                  <input
-                    type="text"
-                    name="lname"
-                    placeholder="Last Name"
-                    required
-                    className="rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                    onChange={handleChange}
-                  />
-                  <input
-                    type="text"
-                    name="phone"
-                    placeholder="Phone No."
-                    required
-                    className="rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                    onChange={handleChange}
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    required
-                    className="rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                    onChange={handleChange}
-                  />
-                  <textarea
-                    name="message"
-                    rows="4"
-                    placeholder="Write Message..."
-                    className="col-span-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                    onChange={handleChange}
-                  />
-                  <button
-                    type="submit"
-                    className="col-span-full rounded-lg bg-indigo-600 py-3 font-semibold text-white transition hover:bg-indigo-700"
-                  >
-                    Submit Now
-                  </button>
-                </form>
-              </div>
+              <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  className="p-3 bg-[#0f141d] border border-gray-700 rounded-lg text-gray-300 focus:border-indigo-500 outline-none"
+                />
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  className="p-3 bg-[#0f141d] border border-gray-700 rounded-lg text-gray-300 focus:border-indigo-500 outline-none"
+                />
+                <input
+                  type="text"
+                  placeholder="Phone"
+                  className="p-3 bg-[#0f141d] border border-gray-700 rounded-lg text-gray-300 focus:border-indigo-500 outline-none"
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="p-3 bg-[#0f141d] border border-gray-700 rounded-lg text-gray-300 focus:border-indigo-500 outline-none"
+                />
+
+                <textarea
+                  placeholder="Your Message…"
+                  rows="4"
+                  className="col-span-full p-3 bg-[#0f141d] border border-gray-700 rounded-lg text-gray-300 focus:border-indigo-500 outline-none"
+                />
+
+                <button className="col-span-full py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white font-semibold transition">
+                  Send Message
+                </button>
+              </form>
             </main>
           </div>
         </div>
       </section>
-
-    
     </>
   );
 }

@@ -1,94 +1,149 @@
-import { Link } from 'react-router-dom';
-import { PhotoProvider, PhotoView } from 'react-photo-view';
-import 'react-photo-view/dist/react-photo-view.css';
-import { useState, useEffect } from 'react';
-export default function Team() {
+import { Link } from "react-router-dom";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
+import { useState, useEffect } from "react";
 
+export default function Team() {
   const teamMembers = [
-    { name: 'Sophia Bennett', role: 'Hacking specialist', img: 'team-1.jpg' },
-    { name: 'Darrell steward', role: 'Attack specialist', img: 'team-2.jpg' },
-    { name: 'Ava mitchell', role: 'Cyber Expert', img: 'team-3.jpg' },
-    { name: 'Ethan carter', role: 'Penetration Tester', img: 'team-4.jpg' },
-    { name: 'Olivia Carter', role: 'Security Analyst', img: 'team-5.jpg' },
-    { name: 'Ethan Cooper', role: 'Security Analyst', img: 'team-6.jpg' },
-    { name: 'Emma Hayes', role: 'Cyber Expert', img: 'team-7.jpg' },
-    { name: 'Liam Parker', role: 'Penetration Tester', img: 'team-8.jpg' },
+    {
+      name: "Dr. Rhea Varma",
+      role: "Lead Avionics Engineer",
+      img: "team-1.jpg",
+    },
+    {
+      name: "Arjun Desai",
+      role: "Embedded Systems Architect",
+      img: "team-2.jpg",
+    },
+    {
+      name: "Sophia Liang",
+      role: "GNC (Guidance & Control) Specialist",
+      img: "team-3.jpg",
+    },
+    {
+      name: "Ethan Rao",
+      role: "Flight Computer Hardware Designer",
+      img: "team-4.jpg",
+    },
+    {
+      name: "Mira Khandelwal",
+      role: "RF & Telemetry Systems Engineer",
+      img: "team-5.jpg",
+    },
+    {
+      name: "Liam Jackson",
+      role: "Aerospace Software Engineer",
+      img: "team-6.jpg",
+    },
+    {
+      name: "Aarav Patel",
+      role: "Simulation & Dynamics Analyst",
+      img: "team-7.jpg",
+    },
+    {
+      name: "Elena Costa",
+      role: "Propulsion Sensor Integration Engineer",
+      img: "team-8.jpg",
+    },
   ];
+
   const [isLoading, setIsLoading] = useState(true);
 
-useEffect(() => {
-  setTimeout(() => setIsLoading(false), 1000);
-}, []);
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 1000);
+  }, []);
 
   return (
     <>
       {/* Preloader */}
       {isLoading && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-        <div className="relative">
-          <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-indigo-600"></div>
-          <img src="/images/loader.svg" alt="Aeravionix" className="absolute inset-0 m-auto h-8 w-8" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+          <div className="relative">
+            <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-800 border-t-indigo-500"></div>
+            <img
+              src="/images/loader.svg"
+              alt="Loading"
+              className="absolute inset-0 m-auto h-8 w-8"
+            />
+          </div>
         </div>
-      </div>)}
-
-    
+      )}
 
       {/* Page Header */}
-      <section className="page-header bg-gradient-to-br from-indigo-50 to-purple-100 py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="mb-4 text-5xl font-extrabold text-gray-900 md:text-6xl">
-            Our <span className="text-indigo-600">team</span>
+      <section
+        className="py-20 bg-cover bg-center relative"
+        style={{ backgroundImage: "url('/images/bg.png')" }}
+      >
+        <div className="absolute inset-0 bg-black/80"></div>
+
+        <div className="relative container mx-auto px-4 text-center">
+          <h1 className="mb-4 text-5xl font-extrabold text-white md:text-6xl">
+            Meet the minds behind{" "}
+            <span className="text-indigo-500">Aerovionix</span>
           </h1>
-          <nav className="flex justify-center space-x-2 text-sm">
-            <Link to="/" className="text-gray-600 hover:text-indigo-600">home</Link>
-            <span className="text-gray-400">/</span>
-            <span className="text-indigo-600">team</span>
+          <p className="text-gray-400 max-w-2xl mx-auto mt-4">
+            Our engineering team designs, builds, and validates mission-critical
+            avionics and intelligent flight systems for modern aerospace
+            vehicles.
+          </p>
+
+          <nav className="flex justify-center space-x-2 text-sm mt-4">
+            <Link to="/" className="text-gray-300 hover:text-indigo-400">
+              home
+            </Link>
+            <span className="text-gray-600">/</span>
+            <span className="text-indigo-400">team</span>
           </nav>
         </div>
       </section>
 
       {/* Team Grid */}
-      <section className="page-team py-20 bg-white">
+      <section className="py-20 bg-[#0b0f17]">
         <div className="container mx-auto px-4">
           <PhotoProvider>
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {teamMembers.map((member, index) => (
                 <div
                   key={index}
-                  className="group relative overflow-hidden rounded-xl bg-white shadow-lg transition-all hover:shadow-2xl"
-                  style={{ animationDelay: `${index * 0.2}s` }}
+                  className="group relative overflow-hidden rounded-xl bg-[#111726] shadow-lg hover:shadow-2xl transition-all"
+                  style={{ animationDelay: `${index * 0.15}s` }}
                 >
-                  {/* Image with Lightbox */}
+                  {/* Image */}
                   <PhotoView src={`/images/${member.img}`}>
                     <img
                       src={`/images/${member.img}`}
                       alt={member.name}
-                      className="h-72 w-full cursor-pointer object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="h-72 w-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-110"
                     />
                   </PhotoView>
 
-                  {/* Overlay on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100">
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                     <div className="absolute bottom-6 left-6 text-white">
                       <h3 className="text-xl font-bold">
-                        <Link to="/team-single" className="hover:underline">
+                        <Link
+                          to="/team-single"
+                          className="hover:text-indigo-400"
+                        >
                           {member.name}
                         </Link>
                       </h3>
-                      <p className="text-sm opacity-90">{member.role}</p>
+                      <p className="text-sm text-indigo-300">{member.role}</p>
                     </div>
 
                     {/* Social Icons */}
                     <div className="absolute bottom-6 right-6 flex space-x-2">
-                      {['facebook-f', 'instagram', 'pinterest-p'].map((icon) => (
-                        <a
-                          key={icon}
-                          href="#"
-                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-white transition hover:bg-white hover:text-indigo-600"
-                        >
-                          <i className={`fa-brands fa-${icon} text-sm`}></i>
-                        </a>
-                      ))}
+                      {["facebook-f", "instagram", "linkedin-in"].map(
+                        (icon) => (
+                          <a
+                            key={icon}
+                            href="#"
+                            className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-indigo-500 hover:text-white"
+                          >
+                            <i className={`fab fa-${icon} text-sm`}></i>
+                          </a>
+                        )
+                      )}
                     </div>
                   </div>
                 </div>
@@ -97,7 +152,6 @@ useEffect(() => {
           </PhotoProvider>
         </div>
       </section>
-
     </>
   );
 }
